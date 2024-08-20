@@ -8,7 +8,7 @@ with open('flight_data.json', 'r') as file:
 # # print(data['data']['itineraries'])
 # print(len(data['data']['itineraries']))
 
-
+print("test git")
 # print(arriveport)
 for i in range(len(data['data']['itineraries'])):
     go_departport = data['data']['itineraries'][i]['legs'][0]['origin']['displayCode']
@@ -31,3 +31,4 @@ for i in range(len(data['data']['itineraries'])):
     print(back_departtime+"->"+back_arrivetime)
     print(formateprice)
     print('----------------------------------------------------------------')
+    
