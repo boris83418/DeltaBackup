@@ -9,16 +9,16 @@ headers = {
 	"x-rapidapi-host": "sky-scanner3.p.rapidapi.com"
 }
 
-# 发起请求
+# 發起request
 response = requests.get(url, headers=headers, params=querystring)
 
-# 检查请求是否成功
+# 檢查請求狀況
 if response.status_code == 200:
-    # 获取 JSON 响应
+    # 確認JSON響應狀況
     data = response.json()
 
-    # 将 JSON 数据写入文件
+    # JSON寫入數據
     with open('flight_data.json', 'w') as file:
-        json.dump(data, file, indent=4)  # 格式化 JSON 输出
+        json.dump(data, file, indent=4)  # 格式化JSON輸出
 else:
     print(f"Error: {response.status_code}")
