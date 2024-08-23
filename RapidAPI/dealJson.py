@@ -12,6 +12,7 @@ def format_datetime(iso_string):
         return dt.strftime('%Y-%m-%d %I:%M %p')
     except ValueError:
         return iso_string
+
 # 呼叫API
 def API_info(departportforinput,arriveportforinput,departDateforinput,returnDateforinput):
         # 根據上面Input去API查詢
@@ -44,11 +45,21 @@ def API_info(departportforinput,arriveportforinput,departDateforinput,returnDate
         print(f"網路請求發生錯誤: {e}")
         return
     
+    data=response.json()
+    #檢查error
+    if not data.get("status",True):
+        errors=data.get("errors",{})
+        errorsmsg=[f"{key}:{value}" for key, value in errors.items() ]
+        print("API 回傳錯誤消息")
+        for msg in errorsmsg:
+            print(msg)
+        return None
+    
     # 確保文件夾存在
-    if not os.path.exists('RapidAPI'):
-        os.makedirs('RapidAPI')
+    if not os.path.exists('RapidAPI_Jsonfile'):
+        os.makedirs('RapidAPI_Jsonfile')
 
-    file_path = os.path.join('RapidAPI', 'flight_data.json')
+    file_path = os.path.join('RapidAPI_Jsonfile', 'flight_data.json')
 
     # JSON 寫入
     try:
@@ -88,7 +99,9 @@ def main():
     replace_dict = {
         "Tigerair Taiwan": "虎航",
         "Peach": "樂桃",
-        "Juneyao Airlines": "吉祥航空"
+        "Juneyao Airlines": "吉祥航空",
+        "Scoot":"酷航",
+        "JetStar":"捷星"
     }
     
 
